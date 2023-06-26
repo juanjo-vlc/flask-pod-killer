@@ -1,23 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app-deployment
+  name: pod-killer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-app
+      app: pod-killer
   template:
     metadata:
       labels:
-        app: flask-app
+        app: pod-killer
     spec:
       containers:
-        - name: flask-app-container
-          image: ghcr.io/juanjo-vlc/flask-pod-killer:latest
+        - name: app
+          image: ghcr.io/juanjo-vlc/flask-pod-killer:main
           ports:
             - containerPort: 5000
           env:
+            - name: DEBUG
+              value: True
             - name: KUBERNETES_NAMESPACE
               valueFrom:
                 fieldRef:
