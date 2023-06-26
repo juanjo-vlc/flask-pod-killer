@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kubernetes Pod Manager</title>
+</head>
+<body>
+    <h1>Running Pods</h1>
+    <table>
+        <tr>
+            <th>Pod Name</th>
+            <th>Action</th>
+        </tr>
+        {% for pod in pods %}
+        <tr>
+            <td>{{ pod }}</td>
+            <td>
+                <form action="/kill" method="post">
+                    <input type="hidden" name="pod" value="{{ pod }}">
+                    <input type="submit" value="Kill">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
